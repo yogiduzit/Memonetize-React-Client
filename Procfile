@@ -1,1 +1,1 @@
-web: npm run build && serve -s build
+web: "npm run build && http-server build -p $PORT"
