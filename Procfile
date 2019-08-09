@@ -1,1 +1,1 @@
-web: "npm run build && http-server build -p $PORT"
+web: "npm run production"
