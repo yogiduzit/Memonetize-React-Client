@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "productions": "react-scripts build && npm serve -s build 4000",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
