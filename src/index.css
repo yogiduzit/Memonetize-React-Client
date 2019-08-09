@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.meme-img {
+  width: 200px;
+  height: 200px;
+}
+.meme-container {
+  border: 1px solid black;
+}
