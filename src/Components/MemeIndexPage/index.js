@@ -1,6 +1,6 @@
 import React from 'react';
 import Meme from '../Meme';
-import Memes from '../../api/index'
+import { Memes } from '../../api/index'
 
 export default class MemeIndexPage extends React.Component {
   constructor(props) {
@@ -20,7 +20,10 @@ export default class MemeIndexPage extends React.Component {
   render() {
     return(
       <div className="memes-container">
-        {this.state.memeData.map(meme => <Meme title={meme.title} body={meme.body} imgURL={meme.meme_img}></Meme>)}
+        {this.state.memeData.map((meme, index) => {
+          return <Meme key={index} title={meme.title} body={meme.body} memeId={meme.id} imgURL={meme.meme_img}></Meme>
+          }
+        )}
       </div>
     )
   }

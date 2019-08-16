@@ -1,5 +1,5 @@
 import React from 'react';
-import Memes from '../../api';
+import { Memes } from '../../api';
 import Meme from '../Meme';
 
 export default class MemeShowPage extends React.Component {

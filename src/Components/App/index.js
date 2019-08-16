@@ -9,7 +9,7 @@ import { signInUser } from '../../store/actions';
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       loggedIn: null
@@ -22,9 +22,10 @@ export default class App extends React.Component {
     return(
 
       <article className="Yogi">
-        <Provider store={store}></Provider>
-        <Router>
-        </Router>
+        <Provider store={store}>
+          <Router>
+          </Router>
+        </Provider>
       </article> 
     )
   }

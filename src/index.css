@@ -18,3 +18,10 @@ code {
 .meme-container {
   border: 1px solid black;
 }
+.welcome-container {
+  background-size: 100%;
+  width: 100vw;
+  height: 70vh;
+  background-repeat: no-repeat;
+  background-image: url("./img/background.jpg");
+}
