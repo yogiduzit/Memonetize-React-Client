@@ -56,5 +56,21 @@ export const User = {
     .then(res => {
       return res.json();
     });
+  },
+  find(id) {
+    return fetch(`${BASE_URL}/users/${id}`, {
+      credentials: "include"
+    })
+    .then(res => {
+      return  res.json()
+    })
+  },
+  current() {
+    return fetch(`${BASE_URL}/current_user`, {
+      credentials: "include"
+    })
+    .then(res => {
+      return res.json()
+    });
   }
 }
