@@ -1,11 +1,7 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { Session } from '../../api/index';
-import { connect} from 'react-redux';
-import { authenticateUser } from '../../store/actions';
 
-
-export class SignInPage extends React.Component {
+export default class SignInPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,33 +31,30 @@ export class SignInPage extends React.Component {
       password: this.state.password
     }
 
-    this.props.authenticateUser(data);
+    Session.create(data).then(res => {
+      if (res.id) {
+        localStorage.setItem("currentUserId", res.id)
+        this.props.history.push('/');
+        this.props.getCurrentUser();
+      }
+
+    });
+
   }
 
   render() {
     return(
-      <div className="form-container">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control required type="email" name="email" placeholder="Enter email" onChange={this.handleChange} />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email" onChange={this.handleChange}/>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" onChange={this.handleChange}/>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  authenticateUser: user => dispatch(authenticateUser(user))
-});
-
-export default connect(undefined, mapDispatchToProps)(SignInPage);

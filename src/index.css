@@ -25,3 +25,16 @@ code {
   background-repeat: no-repeat;
   background-image: url("./img/background.jpg");
 }
+.image-box {
+
+  /* Here's the trick */
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , url("./img/background.jpg") center center;
+  background-size: cover;
+
+  /* Here's the same styles we applied to our content-div earlier */
+  color: white;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
