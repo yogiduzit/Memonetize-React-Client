@@ -13,13 +13,15 @@ export default class NavigationBar extends React.Component {
   }
 
   signOut(event) {
-
+    event.preventDefault();
+    
     Session.destroy()
     .then(() => {
-      this.props.getCurrentUser();
       localStorage.removeItem("currentUserId");
+      this.props.getCurrentUser();
+
     })
-    
+
   }
 
   render() {

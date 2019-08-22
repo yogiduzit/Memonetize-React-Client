@@ -2,7 +2,6 @@
   "name": "sell-yo-meme-react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "localhost:3001",
   "dependencies": {
     "express": "^4.17.1",
     "react": "^16.8.6",

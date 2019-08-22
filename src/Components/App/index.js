@@ -8,6 +8,7 @@ import Welcome from '../Welcome';
 import SignInPage from '../SignInPage';
 import SignUpPage from '../SignUpPage';
 import { User } from '../../api';
+import NewMemePage from '../NewMemePage';
 
 
 export default class App extends React.Component {
@@ -39,12 +40,13 @@ export default class App extends React.Component {
       <article className="Yogi">
         <BrowserRouter>
           <NavigationBar isAuth={this.state.currentUser ? true : false } getCurrentUser={this.getCurrentUser} />
-          <Route exact path="/" component={Welcome}></Route>
-          <Route exact path="/memes" component={MemeIndexPage}></Route>
-          <Route exact path="/memes/:id" component={MemeShowPage}></Route>
-          <Route exact path="/sessions/new" render={(props) => <SignInPage {...props} getCurrentUser={this.getCurrentUser}/>}></Route>
-          <Route exact path="/sessions/destroy"></Route>
-          <Route exact path="/users/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }></Route>
+          <Route exact path="/" component={Welcome}/>
+          <Route exact path="/memes" component={MemeIndexPage}/>
+          <Route exact path="/memes/:id" component={MemeShowPage}/>
+          <Route exact path="/sessions/new" render={(props) => <SignInPage {...props} getCurrentUser={this.getCurrentUser}/>}/>
+          <Route exact path="/sessions/destroy"/>
+          <Route exact path="/users/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }/>
+          <Route exact path="/meme/new" component={NewMemePage}/>
         </BrowserRouter>
       </article> 
     )
