@@ -6,7 +6,7 @@ export const Memes = {
       credentials: 'include'
     })
     .then(res => {
-      return res.json()
+      return res.json();
     });
   },
   find(id) {
@@ -23,8 +23,15 @@ export const Memes = {
       credentials: 'include',
       body: params
     })
-    .then(res => res.json())
-  } 
+    .then(res => res.json());
+  },
+  destroy(id) {
+    return fetch(`${BASE_URL}/memes/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+    .then(res => res.json());
+  }
 }
 export const Session = {
   create(params) {

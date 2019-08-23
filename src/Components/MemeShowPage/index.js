@@ -9,6 +9,8 @@ export default class MemeShowPage extends React.Component {
     this.state = {
       memeData: null
     }
+
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -20,14 +22,39 @@ export default class MemeShowPage extends React.Component {
     })
   }
 
+  handleDelete(event) {
+    event.preventDefault();
+
+    Memes.destroy(this.props.match.params.id)
+    .then(res => {
+      this.props.history.push('/memes')
+    })
+  }
+
   render() {
     if (!this.state.memeData) {
       return(<div className=""></div>)
     }
     return(
       <div className="main-container">
-        <Meme imgURL={this.state.memeData.meme_img} title={this.state.memeData.title} body={this.state.memeData.body}></Meme>
+        <div className="meme-img-container">
+          <img src={this.state.memeData.meme_img}/>
+        </div>
+        <aside className="meme-about">
+          <h3>{this.state.memeData.title}</h3>
+          <p>{this.state.memeData.body}</p>
+          <p>Created by: 
+            <a href={`/users/${this.state.memeData.author.id}`}>{`${this.state.memeData.author.first_name} ${this.state.memeData.author.last_name}`}</a>
+          </p>
+        </aside>
+        {this.state.memeData.authorized ? 
+          <div className="buttons-container">
+            <button className="update-meme"><a href={`/memes/${this.state.memeData.id}/edit`}>Update</a></button>
+            <button className="delete-meme" onClick={this.handleDelete}>Delete Meme</button>
+          </div>
+        : null}
       </div>
+
     );
   }
 }
