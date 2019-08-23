@@ -3,22 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "http-server": "^0.11.1",
+    "express": "^4.17.1",
     "react": "^16.8.6",
+    "react-activestorage-provider": "^0.8.0",
     "react-bootstrap": "^1.0.0-beta.11",
     "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
     "serve": "^11.1.0"
   },
   "scripts": {
     "start": "PORT=8080 react-scripts start",
-    "productions": "react-scripts build && npm serve -s build 4000",
+    "production": "react-scripts build && node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
