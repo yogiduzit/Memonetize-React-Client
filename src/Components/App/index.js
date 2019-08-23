@@ -9,6 +9,7 @@ import SignInPage from '../SignInPage';
 import SignUpPage from '../SignUpPage';
 import { User } from '../../api';
 import NewMemePage from '../NewMemePage';
+import AuthRoute from '../AuthRoute';
 
 
 export default class App extends React.Component {
@@ -30,6 +31,11 @@ export default class App extends React.Component {
           currentUser: user
         })
         localStorage.setItem("currentUserId", user.id);
+      } else {
+        localStorage.removeItem('currentUserId')
+        this.setState({
+          currentUser: null
+        });
       }
     })
   }
@@ -39,14 +45,14 @@ export default class App extends React.Component {
 
       <article className="Yogi">
         <BrowserRouter>
-          <NavigationBar isAuth={this.state.currentUser ? true : false } getCurrentUser={this.getCurrentUser} />
+          <Route exact path="/*" render={(props) => <NavigationBar {...props} isAuth={this.state.currentUser ? true : false } getCurrentUser={this.getCurrentUser}/>}/>
           <Route exact path="/" component={Welcome}/>
           <Route exact path="/memes" component={MemeIndexPage}/>
           <Route exact path="/memes/:id" component={MemeShowPage}/>
           <Route exact path="/sessions/new" render={(props) => <SignInPage {...props} getCurrentUser={this.getCurrentUser}/>}/>
           <Route exact path="/sessions/destroy"/>
           <Route exact path="/users/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }/>
-          <Route exact path="/meme/new" component={NewMemePage}/>
+          <AuthRoute exact path="/meme/new"isAuth={this.state.currentUser ? true : false}  component={NewMemePage}/>
         </BrowserRouter>
       </article> 
     )
