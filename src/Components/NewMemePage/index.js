@@ -27,7 +27,7 @@ export default class NewMemePage extends React.Component {
     })
 
     Memes
-    .update(formData, this.props.match.params.id)
+    .create(formData)
     .then(res => {
       if (res.id) {
         this.props.history.push(`/memes/${res.id}`);

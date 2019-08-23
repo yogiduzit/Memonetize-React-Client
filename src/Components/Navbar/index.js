@@ -18,6 +18,7 @@ export default class NavigationBar extends React.Component {
     Session.destroy()
     .then(() => {
       localStorage.removeItem("currentUserId");
+      this.props.history.push('/');
       this.props.getCurrentUser();
 
     })
@@ -43,7 +44,11 @@ export default class NavigationBar extends React.Component {
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/" onClick={this.signOut}>Sign Out</a>
-            </li></ul>)
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/meme/new" >Post Meme</a>
+            </li>
+            </ul>)
             : (<ul className="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="/sessions/new">Sign In</a>

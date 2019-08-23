@@ -1,4 +1,4 @@
-const BASE_URL = "https://sell-yo-meme.herokuapp.com";
+const BASE_URL = "https://sell-yo-meme.herokuapp.com/api/v1";
 
 export const Memes = {
   all() {

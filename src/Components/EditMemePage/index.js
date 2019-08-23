@@ -39,7 +39,7 @@ export default class EditMemePage extends React.Component {
     })
 
     Memes
-    .create(formData)
+    .update(formData, this.props.match.params.id)
     .then(res => {
       if (res.id) {
         this.props.history.push(`/memes/${res.id}`);
