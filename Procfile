@@ -1,1 +1,1 @@
-web: "npm run production"
+web: "react-scripts build && node server.js"
