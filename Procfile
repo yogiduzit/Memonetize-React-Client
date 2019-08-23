@@ -1,1 +1,1 @@
-web: "react-scripts build && node server.js"
+web: react-scripts build && node server.js
