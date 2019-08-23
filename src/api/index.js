@@ -31,6 +31,14 @@ export const Memes = {
       credentials: 'include',
     })
     .then(res => res.json());
+  },
+  update(params, id) {
+    return fetch(`${BASE_URL}/memes/${id}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      body: params
+    })
+    .then(res => res.json());
   }
 }
 export const Session = {

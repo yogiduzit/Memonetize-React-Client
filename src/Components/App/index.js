@@ -1,15 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import { User } from '../../api';
 import NavigationBar from '../Navbar';
 import MemeIndexPage from '../MemeIndexPage';
 import MemeShowPage from '../MemeShowPage';
 import Welcome from '../Welcome';
 import SignInPage from '../SignInPage';
 import SignUpPage from '../SignUpPage';
-import { User } from '../../api';
 import NewMemePage from '../NewMemePage';
 import AuthRoute from '../AuthRoute';
+import EditMemePage from '../EditMemePage';
 
 
 export default class App extends React.Component {
@@ -52,7 +53,8 @@ export default class App extends React.Component {
           <Route exact path="/sessions/new" render={(props) => <SignInPage {...props} getCurrentUser={this.getCurrentUser}/>}/>
           <Route exact path="/sessions/destroy"/>
           <Route exact path="/users/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }/>
-          <AuthRoute exact path="/meme/new"isAuth={this.state.currentUser ? true : false}  component={NewMemePage}/>
+          <AuthRoute exact path="/meme/new" isAuth={this.state.currentUser ? true : false}  component={NewMemePage}/>
+          <AuthRoute exact path="/memes/:id/edit" isAuth={this.state.currentUser ? true : false} component={EditMemePage}/>
         </BrowserRouter>
       </article> 
     )

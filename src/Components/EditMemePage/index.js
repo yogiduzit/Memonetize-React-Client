@@ -2,7 +2,7 @@ import React from 'react';
 import { Memes } from '../../api';
 
 
-export default class NewMemePage extends React.Component {
+export default class EditMemePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +19,18 @@ export default class NewMemePage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    Memes
+    .find(this.props.match.params.id)
+    .then(res => {
+      if (res.id) {
+        this.setState({
+          meme: res
+        })
+      }
+    })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
@@ -27,7 +39,7 @@ export default class NewMemePage extends React.Component {
     })
 
     Memes
-    .update(formData, this.props.match.params.id)
+    .create(formData)
     .then(res => {
       if (res.id) {
         this.props.history.push(`/memes/${res.id}`);
@@ -64,15 +76,15 @@ export default class NewMemePage extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div class="form-group">
           <label for="title-field">Title</label>
-          <input type="text" class="form-control title" name="title" id="title-field" placeholder="Enter title" onChange={this.handleChange}/>
+          <input type="text" class="form-control title" name="title" id="title-field" placeholder="Enter title" value={this.state.meme.title} onChange={this.handleChange}/>
         </div>
         <div class="form-group">
           <label for="body-textarea">Body</label>
-          <textarea class="form-control body" name="body" id="body-textarea" rows="3" onChange={this.handleChange}></textarea>
+          <textarea class="form-control body" name="body" id="body-textarea" value={this.state.meme.body} rows="3" onChange={this.handleChange}></textarea>
         </div>
         <div class="form-group">
           <label for="meme-img">Meme Image</label>
-          <input type="file" onChange={this.handleFile}></input>
+          <input type="file" onChange={this.handleFile} ></input>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
