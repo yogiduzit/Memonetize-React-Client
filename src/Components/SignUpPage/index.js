@@ -25,6 +25,7 @@ export default class SignUpPage extends React.Component {
     .create(this.state)
     .then((data) => {
       this.props.getCurrentUser();
+      this.props.history.push('/')
     })
   }
 
