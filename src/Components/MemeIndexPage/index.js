@@ -1,6 +1,7 @@
 import React from 'react';
 import Meme from '../Meme';
 import { Memes } from '../../api/index'
+import {parseQueryString} from '../../helpers';
 
 export default class MemeIndexPage extends React.Component {
   constructor(props) {
@@ -12,9 +13,21 @@ export default class MemeIndexPage extends React.Component {
   }
 
   componentDidMount() {
-    Memes.all().then(memes => this.setState({
-      memeData: memes
-    }));
+    const query = parseQueryString(this.props.location.search);
+    const { tagName } = query;
+    if (tagName) {
+      Memes
+      .findByTag(tagName)
+      .then(memes => {
+        this.setState({
+          memeData: memes
+        })
+      })
+    } else {
+      Memes.all().then(memes => this.setState({
+        memeData: memes
+      }));
+    }
   }
 
   render() {

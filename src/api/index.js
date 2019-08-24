@@ -1,4 +1,4 @@
-const BASE_URL = "https://sell-yo-meme.herokuapp.com/api/v1";
+const BASE_URL = "https://localhost:3000/api/v1";
 
 export const Memes = {
   all() {
@@ -39,6 +39,12 @@ export const Memes = {
       body: params
     })
     .then(res => res.json());
+  },
+  findByTag(tagName) {
+    return fetch(`${BASE_URL}/memes?tag_name=${tagName}`, {
+      credentials: 'include'
+    })
+    .then(res => res.json())
   }
 }
 export const Session = {
