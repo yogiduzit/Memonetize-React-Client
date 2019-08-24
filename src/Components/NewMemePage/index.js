@@ -10,7 +10,8 @@ export default class NewMemePage extends React.Component {
       meme: {
         title: '',
         body: '',
-        meme_img: null
+        meme_img: null,
+        tag_names: ''
       }
     }
 
@@ -73,6 +74,10 @@ export default class NewMemePage extends React.Component {
         <div class="form-group">
           <label for="meme-img">Meme Image</label>
           <input type="file" onChange={this.handleFile}></input>
+        </div>
+        <div class="form-group">
+          <label for="tag-names-field">Title</label>
+          <input type="text" class="form-control title" name="tag_names" id="tag-names-field" placeholder="Enter tags" onChange={this.handleChange}/>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
