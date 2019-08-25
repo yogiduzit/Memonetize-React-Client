@@ -46,6 +46,11 @@ export default class MemeShowPage extends React.Component {
           <p>Created by: 
             <a href={`/users/${this.state.memeData.author.id}`}>{`${this.state.memeData.author.first_name} ${this.state.memeData.author.last_name}`}</a>
           </p>
+          <ul className="tag-list">
+            {this.state.memeData.tag_names.split(', ').map((name, index) => {
+              return <li key={`${index}`}><a href={`/memes?tagName=${name}`}>{`${name}`}</a></li>
+            })}
+            </ul>
         </aside>
         {this.state.memeData.authorized ? 
           <div className="buttons-container">
