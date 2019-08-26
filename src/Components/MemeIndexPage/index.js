@@ -10,6 +10,8 @@ export default class MemeIndexPage extends React.Component {
     this.state = {
       memeData: []
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -30,13 +32,26 @@ export default class MemeIndexPage extends React.Component {
     }
   }
 
+  handleClick(event) {
+    event.preventDefault();
+
+    const {currentTarget} = event;
+    const id = currentTarget.getAttribute('data-key');
+    this.props.history.push(`/memes/${id}`);
+  }
+
   render() {
     return(
-      <div className="memes-container">
-        {this.state.memeData.map((meme, index) => {
-          return <Meme key={index} title={meme.title} body={meme.body} memeId={meme.id} imgURL={meme.meme_img}></Meme>
-          }
-        )}
+      <div className="index-container">
+        <div className="memes-container">
+          {this.state.memeData.map((meme, index) => {
+            return <Meme key={index} meme={meme} handleClick={this.handleClick}></Meme>
+            }
+          )}
+        </div>
+        <div className="popular-tags-container">
+          
+        </div>
       </div>
     )
   }
