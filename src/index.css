@@ -5,36 +5,67 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(217, 217, 226);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.meme-img {
-  width: 200px;
-  height: 200px;
+article.main-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+
 }
-.meme-container {
-  border: 1px solid black;
-}
-.welcome-container {
-  background-size: 100%;
+nav.navbar {
   width: 100vw;
-  height: 70vh;
-  background-repeat: no-repeat;
-  background-image: url("./img/background.jpg");
+  background-color: white;
+}
+.logo-image {
+  width: 32px;
+  height: 35px;
 }
 .image-box {
-
   /* Here's the trick */
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , url("./img/background.jpg") center center;
   background-size: cover;
 
   /* Here's the same styles we applied to our content-div earlier */
   color: white;
-  min-height: 50vh;
+  width: 100vw;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.memes-container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 40vw;
+  background-color: white;
+  padding: 20px 10px 10px 10px;
+}
+.meme-container {
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+.votes-container {
+  background-color: rgb(218, 217, 219);
+  width: 7%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.about-meme {
+  margin: 5px;
+}
+.meme-img-container {
+  object-fit: contain;
+}
+.meme-img {
+  width: 80%;
 }
