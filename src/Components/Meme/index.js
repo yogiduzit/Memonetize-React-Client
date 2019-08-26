@@ -1,24 +1,31 @@
 import React from 'react';
 
-export default class Meme extends React.Component {
-  constructor(props) {
-    super(props);
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en'
 
-    this.state = {
-      memeData: null
-    }
-  }
-  render() {
+export default function Meme(props) {
+
+  TimeAgo.addLocale(en);
+  const timeAgo = new TimeAgo('en-US');
+  const date = new Date(props.meme.created_at);
     return(
       <div className="meme-container">
-        <div className="meme-img-container">
-          <img src={this.props.imgURL} className="meme-img" alt="A meme"></img>
+        <div className="votes-container">
+        <i className="fas fa-arrow-up"></i>
+        <i className="fas fa-arrow-down"></i>
         </div>
-        <div className="meme-body">
-          <h4><a href={`/memes/${this.props.memeId}`}>{this.props.title}</a></h4>
-          <p>{this.props.body}</p>
+        <div className="about-meme" onClick={props.handleClick}  data-key={props.meme.id}>
+          <div className="meme-info">
+            <span><small>Posted by <a href={`/users/${props.meme.author.id}`}>{props.meme.author.full_name} </a>{timeAgo.format(date)}</small></span>
+          </div>
+          <div className="meme-title">
+            <h4>{props.meme.title}</h4>
+          </div>
+          <div className="meme-img-container">
+            <img src={props.meme.meme_img} className="meme-img" alt="A meme"></img>
+          </div>
         </div>
+
       </div>
     )
-  }
 }
