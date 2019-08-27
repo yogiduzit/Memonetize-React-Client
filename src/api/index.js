@@ -104,3 +104,41 @@ export const User = {
     });
   }
 }
+export const Payment =  {
+  create(params) {
+    return fetch(`${BASE_URL}/charges`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(params)
+    })
+  }
+}
+
+export const Vote = {
+  create(params, memeId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/votes`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json);
+  },
+  update(params, memeId, voteId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/votes/${voteId}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json()); 
+  }
+}
