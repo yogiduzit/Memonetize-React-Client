@@ -45,12 +45,11 @@ export default class MemeIndexPage extends React.Component {
       <div className="index-container">
         <div className="memes-container">
           {this.state.memeData.map((meme, index) => {
-            return <Meme key={index} meme={meme} handleClick={this.handleClick}></Meme>
+            return <Meme key={index} id={meme.id} handleClick={this.handleClick}></Meme>
             }
           )}
         </div>
         <div className="popular-tags-container">
-          
         </div>
       </div>
     )
