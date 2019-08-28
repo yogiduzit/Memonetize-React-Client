@@ -11,6 +11,7 @@ import SignUpPage from '../SignUpPage';
 import NewMemePage from '../NewMemePage';
 import AuthRoute from '../AuthRoute';
 import EditMemePage from '../EditMemePage';
+import UserProfile from '../../UserProfile';
 
 
 export default class App extends React.Component {
@@ -44,7 +45,7 @@ export default class App extends React.Component {
   render() {
     return(
 
-      <article className="Yogi">
+      <article className="main-container">
         <BrowserRouter>
           <Route exact path="/*" render={(props) => <NavigationBar {...props} isAuth={this.state.currentUser ? true : false } getCurrentUser={this.getCurrentUser}/>}/>
           <Route exact path="/" component={Welcome}/>
@@ -53,6 +54,7 @@ export default class App extends React.Component {
           <Route exact path="/sessions/new" render={(props) => <SignInPage {...props} getCurrentUser={this.getCurrentUser}/>}/>
           <Route exact path="/sessions/destroy"/>
           <Route exact path="/users/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }/>
+          <Route exact path="/users/:id" component={UserProfile}/>
           <AuthRoute exact path="/meme/new" isAuth={this.state.currentUser ? true : false}  component={NewMemePage}/>
           <AuthRoute exact path="/memes/:id/edit" isAuth={this.state.currentUser ? true : false} component={EditMemePage}/>
         </BrowserRouter>

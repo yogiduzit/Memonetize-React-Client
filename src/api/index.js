@@ -1,4 +1,4 @@
-const BASE_URL = "https://localhost:3000/api/v1";
+const BASE_URL = process.env.API_URL || "https://localhost:3000/api/v1";
 
 export const Memes = {
   all() {
@@ -102,5 +102,43 @@ export const User = {
     .then(res => {
       return res.json()
     });
+  }
+}
+export const Payment =  {
+  create(params) {
+    return fetch(`${BASE_URL}/charges`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(params)
+    })
+  }
+}
+
+export const Vote = {
+  create(params, memeId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/votes`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json);
+  },
+  update(params, memeId, voteId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/votes/${voteId}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json()); 
   }
 }
