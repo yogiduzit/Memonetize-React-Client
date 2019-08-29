@@ -1,5 +1,6 @@
 import React from 'react';
 import { User } from '../../api';
+import Error from '../Error';
 
 export default class SignUpPage extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class SignUpPage extends React.Component {
         email: '',
         password: '',
         password_confirmation: ''
-      }
+      },
+      errors: []
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,8 +26,15 @@ export default class SignUpPage extends React.Component {
     User
     .create(this.state)
     .then((data) => {
-      this.props.getCurrentUser();
-      this.props.history.push('/')
+      if (data.id) {
+        this.props.getCurrentUser();
+        this.props.history.push('/');
+      } else if (data.errors) {
+        this.setState({
+          ...this.state,
+          errors: data.errors
+        })
+      }
     })
   }
 
@@ -47,29 +56,41 @@ export default class SignUpPage extends React.Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label for="first-name">First Name</label>
-          <input type="text" name="first_name" id="first-name" className="form-control" onChange={this.handleChange} placeholder="Enter first name" />
-        </div>
-        <div className="form-group">
-          <label for="last-name">Last Name</label>
-          <input type="text" name="last_name" id="first-name" className="form-control" onChange={this.handleChange} placeholder="Enter last name" />
-        </div>
-        <div className="form-group">
-          <label for="email">E-mail</label>
-          <input type="text" name="email" id="email" className="form-control" onChange={this.handleChange} placeholder="Enter email" />
-        </div>
-        <div className="form-group">
-          <label for="password">Password</label>
-          <input type="text" name="password" id="password" className="form-control" onChange={this.handleChange} placeholder="Enter password" />
-        </div>
-        <div className="form-group">
-          <label for="password-confirmation">Password Confirmation</label>
-          <input type="text" name="password_confirmation" id="password-confirmation" className="form-control" onChange={this.handleChange} placeholder="Confirm password" />
-        </div>
-        <input type="submit" className="btn btn-primary"/>
-      </form>
+      <div className="signup-form-container">
+        {
+          this.state.errors[0] ? 
+            <div className="errors-container">
+              {
+                this.state.errors.map((value, index) => <Error key={index} body={value}/>)
+              }
+            </div>
+          : null
+
+        }
+        <form onSubmit={this.handleSubmit} className="signup-form">
+          <div className="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" name="first_name" id="first-name" className="form-control" onChange={this.handleChange} placeholder="Enter first name" />
+          </div>
+          <div className="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" name="last_name" id="first-name" className="form-control" onChange={this.handleChange} placeholder="Enter last name" />
+          </div>
+          <div className="form-group">
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email" className="form-control" onChange={this.handleChange} placeholder="Enter email" />
+          </div>
+          <div className="form-group">
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password" className="form-control" onChange={this.handleChange} placeholder="Enter password" />
+          </div>
+          <div className="form-group">
+            <label for="password-confirmation">Password Confirmation</label>
+            <input type="text" name="password_confirmation" id="password-confirmation" className="form-control" onChange={this.handleChange} placeholder="Confirm password" />
+          </div>
+          <input type="submit" className="btn btn-primary"/>
+        </form>
+      </div>
     );
   }
 }
