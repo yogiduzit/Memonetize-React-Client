@@ -18,6 +18,7 @@ export default class Meme extends React.Component {
   componentDidMount() {
     this.setMeme();
   }
+
   setMeme() {
     Memes
     .find(this.props.id)
@@ -34,6 +35,7 @@ export default class Meme extends React.Component {
 
   vote(event) {
     const { currentTarget } = event;
+    console.log(currentTarget);
     const voteType = currentTarget.getAttribute('data-vote-type');
     const voteParams = {vote: {vote_type: voteType}};
     if (this.state.meme.current_user_vote) {
@@ -60,10 +62,10 @@ export default class Meme extends React.Component {
     return(
       <div className="meme-container">
         <div className="votes-container">
-        <i className="fas fa-arrow-up" data-vote-type='1' onClick={this.vote}></i>
-        <p className="votes">{this.state.meme.upvotes - this.state.meme.downvotes}</p>
-        <i className="fas fa-arrow-down" data-vote-type='-1' onClick={this.vote}></i>
-        </div>
+          <i className="fas fa-arrow-up" data-vote-type='1' onClick={this.vote}></i>
+          <p className="votes">{this.state.meme.upvotes - this.state.meme.downvotes}</p>
+          <i className="fas fa-arrow-down" data-vote-type='-1' onClick={this.vote}></i>
+          </div>
         <div className="about-meme" onClick={this.props.handleClick}  data-key={this.state.meme.id}>
           <div className="meme-info">
             <span><small>Posted by <a href={`/users/${this.state.meme.author.id}`}>{this.state.meme.author.full_name} </a>{timeAgo.format(date)}</small></span>
@@ -71,10 +73,11 @@ export default class Meme extends React.Component {
           <div className="meme-title">
             <h4>{this.state.meme.title}</h4>
           </div>
-          <div className="meme-img-container">
+          <div className="meme-img-container index">
             <img src={this.state.meme.meme_img} className="meme-img" alt="A meme"></img>
           </div>
-        </div>
+
+      </div>
 
       </div>
     )

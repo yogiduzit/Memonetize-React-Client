@@ -12,7 +12,8 @@ export default class SignUpPage extends React.Component {
         last_name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        tag_names: []
       },
       errors: []
     }
@@ -87,6 +88,10 @@ export default class SignUpPage extends React.Component {
           <div className="form-group">
             <label for="password-confirmation">Password Confirmation</label>
             <input type="text" name="password_confirmation" id="password-confirmation" className="form-control" onChange={this.handleChange} placeholder="Confirm password" />
+          </div>
+          <div className="form-group">
+            <label for="tag-names-field">Tags</label>
+            <input type="text" className="form-control tags" name="tag_names" id="tag-names-field" placeholder="funny, puns, star-wars" onChange={this.handleChange}/>
           </div>
           <input type="submit" className="btn btn-primary"/>
         </form>
