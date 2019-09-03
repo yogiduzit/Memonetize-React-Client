@@ -45,6 +45,12 @@ export const Memes = {
       credentials: 'include'
     })
     .then(res => res.json())
+  },
+  popularTags() {
+    return fetch(`${BASE_URL}/popular_tags`, {
+      credentials: 'include'
+    })
+    .then(res => res.json());
   }
 }
 export const Session = {
@@ -140,5 +146,46 @@ export const Vote = {
       body: JSON.stringify(params)
     })
     .then(res => res.json()); 
+  }
+}
+export const Comments = {
+  find(memeId, id) {
+    return fetch(`${BASE_URL}/memes/${memeId}/comments/${id}`, {
+      credentials: 'include'
+    })
+    .then(res => {
+      return res.json();
+    })
+  },
+  create(params, memeId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/comments`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json());
+  },
+  update(params, memeId, id) {
+    return fetch(`${BASE_URL}/memes/${memeId}/comments/${id}`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    .then(res => res.json()); 
+  },
+  destroy(memeId) {
+    return fetch(`${BASE_URL}/memes/${memeId}/comments`, {
+      method: 'DELETE',
+      credentials: 'include'
+    })
+    .then(res => {
+      return res.json();
+    });
   }
 }

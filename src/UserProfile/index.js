@@ -35,9 +35,6 @@ export default class UserProfile extends React.Component {
   }
 
   render() {
-    if (!this.state.userData) {
-      return(<div className="error-container">Sorry! User not found</div>)
-    }
 
     return(
       <div className="user-info">

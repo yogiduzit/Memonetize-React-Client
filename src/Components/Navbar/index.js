@@ -7,10 +7,14 @@ export default class NavigationBar extends React.Component {
     super(props);
 
     this.state = {
-
+      user: null
     }
 
     this.signOut = this.signOut.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getCurrentUser();
   }
 
   signOut(event) {
@@ -42,22 +46,40 @@ export default class NavigationBar extends React.Component {
             <li className="nav-item active">
               <a className="nav-link" href="/memes">Memes</a>
             </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="/memes">About</a>
+            </li>
+            {
+              this.props.isAuth ?
+            <li className="nav-item active">
+              <a className="nav-link" href="/meme/new">Create</a>
+            </li> : null
+            }
           </ul>
             { this.props.isAuth ? 
-            (<ul className="navbar-nav auth-nav"><li className="nav-item">
-              <a className="nav-link" href="/users/current">My Profile</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/" onClick={this.signOut}>Sign Out</a>
-            </li>
+            (<ul className="navbar-nav auth-nav">
+              <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {this.props.user.full_name }
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a className="dropdown-item" href="/" onClick={this.signOut}>Sign Out</a>
+                  <a className="dropdown-item" href="/users/current">My Profile</a>
+                  { !this.props.user.is_pro ? <a className="dropdown-item" href="/payments">Buy Gold</a> : null}
+
+                </div>
+              </div>
             </ul>)
             : (<ul className="navbar-nav auth-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="/sessions/new">Log In</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/users/new">Sign Up</a>
-              </li>
+              <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  { null }
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a className="dropdown-item" href="/sessions/new">Log In</a>
+                  <a className="dropdown-item" href="/user/new">Sign Up</a>
+                </div>
+              </div>
             </ul>)
             }
 
