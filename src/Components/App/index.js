@@ -27,6 +27,10 @@ export default class App extends React.Component {
     this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
+  componentDidMount() {
+    console.log(process.env);
+  }
+
 
   getCurrentUser() {
     User.current().then(user => {
