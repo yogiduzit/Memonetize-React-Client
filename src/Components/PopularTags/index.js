@@ -5,15 +5,22 @@ export default function PopularTags(props) {
     <div className="popular-tags-container">
       <div className="ui celled list">
         <h3 className="popular-tags-heading">Trending !</h3>
-        {props.popularTags.map((value, index) => {
-          return ( <div class="item">
-                <div className="content">
-                  <a href={`/memes?tagName=${value}`}>
-                    <p className="tag" key={`${index}`}>{`${value}`}</p>
-                  </a>
-                </div>
-              </div>)
-          })}
+        {
+          props.popularTags[0] ?
+            props.popularTags.map((value, index) => {
+              return(<div class="item">
+                        <div className="content">
+                          <a href={`/memes?tagName=${value}`}>
+                            <p className="tag" key={`${index}`}>{`${value}`}</p>
+                          </a>
+                        </div>
+                      </div>
+              )
+            })
+            :
+            <h3>Sorry! No tags found</h3>
+          }
+        }
       </div>
       <button className="see-all-tags btn btn-primary">
       <a href="/tags">See all</a></button>
