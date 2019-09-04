@@ -28,9 +28,6 @@ export default class App extends React.Component {
     this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
-  componentDidMount() {
-    console.log(process.env);
-  }
 
 
   getCurrentUser() {
@@ -63,7 +60,7 @@ export default class App extends React.Component {
           <Route exact path="/user/new" render={ (props) => <SignUpPage {...props} getCurrentUser={this.getCurrentUser} /> }/>
           <Route exact path="/users/:id" component={UserProfile}/>
           <Route exact path="/payments" render={(props) => 
-            <StripeProvider apiKey="pk_test_tfsp6rkLdxBLJ48H9nqBh1xl00reCwH1xb">
+            <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
               <Elements>
                 <PaymentForm {...props}/>
               </Elements>

@@ -1,4 +1,4 @@
-const BASE_URL = process.env.API_URL || "https://localhost:3000/api/v1";
+const BASE_URL = process.env.REACT_APP_API_URL || "https://localhost:3000/api/v1";
 
 export const Memes = {
   all() {
