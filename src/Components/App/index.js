@@ -14,6 +14,7 @@ import AuthRoute from '../AuthRoute';
 import EditMemePage from '../EditMemePage';
 import UserProfile from '../../UserProfile';
 import PaymentForm from '../PaymentForm';
+require('dotenv').config();
 
 
 export default class App extends React.Component {
